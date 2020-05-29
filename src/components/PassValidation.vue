@@ -20,7 +20,7 @@
                 <div class="matches" v-if='notSamePasswords'>
                     <p>Senhas não conferem.</p>
                 </div>
-                <div class="pass-requirement"> 
+                <div class="pass-requirement" v-if="!passwordValidation.valid"> 
                     A senha deve conter:
                     <span
                         :key="error" 
@@ -28,8 +28,9 @@
                         {{ error }}
                     </span>
                 </div>
-
-                <button>Salvar</button>
+                <div class="btn-box">
+                    <button>Salvar</button>
+                </div>
             </form>
         </div>
         <div class="overlay-container">
@@ -71,20 +72,26 @@ export default {
             return (this.password !== "" && this.checkPassword !== "")
         },
         passwordValidation () {
+            
             console.log("pass validation")
+
             let errors = []
-            for (let condition of this.rules) {
+            for (let condition of this.rules) { 
+
                 console.log(condition)
+
                 if (!condition.regex.test(this.password)) {
                     console.log(this.password)
                     errors.push(condition.message)
                 }
             }
-            if (errors.length === 0) {
-                return { valid:true, errors }
-            } else {
-                return { valid:false, errors }
-            }
+
+            return (errors.length === 0) ? { valid: true, errors} : { valid: false, errors }
+            // if (errors.length === 0) {
+            //     return { valid: true, errors }
+            // } else { 
+            //     return { valid: false, errors }
+            // }
         }
     },
     methods: {
@@ -136,7 +143,6 @@ p {
 	font-weight: 100;
 	line-height: 20px;
 	letter-spacing: 0.5px;
-
 }
 
 span {
@@ -148,7 +154,6 @@ a {
 	color: #333;
 	font-size: 14px;
 	text-decoration: none;
-
 }
 
 button {
@@ -173,14 +178,12 @@ button:focus {
 	outline: none;
 }
 
-button.ghost {
-	background-color: transparent;
-	border-color: #FFFFFF;
+.pass-requirement {
+    margin-top: 10px;
 }
 
-.pass-requirement {
-  margin-top: 10px;
-  margin-bottom : 20px;
+.btn-box {
+    margin-top: 20px;
 }
 
 form {
@@ -228,86 +231,21 @@ input {
 	z-index: 2;
 }
 
-.container.right-panel-active .sign-in-container {
-	transform: translateX(100%);
-}
-
-.sign-up-container {
-	left: 0;
-	width: 50%;
-	opacity: 0;
-	z-index: 1;
-}
-
-.container.right-panel-active .sign-up-container {
-	transform: translateX(100%);
-	opacity: 1;
-	z-index: 5;
-	animation: show 0.6s;
-}
-
-
 .overlay-container {
 	position: absolute;
-	top: 0;
 	left: 50%;
 	width: 50%;
 	height: 100%;
-	overflow: hidden;
-	transition: transform 0.6s ease-in-out;
-	z-index: 100;
-}
-
-.container.right-panel-active .overlay-container{
-	transform: translateX(-100%);
 }
 
 .overlay {
 	background: #ff7b00;
 	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: 0 0;
 	color: #FFFFFF;
 	position: relative;
 	left: -100%;
 	height: 100%;
 	width: 200%;
-   transform: translateX(0);
-	transition: transform 0.6s ease-in-out;
 }
-
-.container.right-panel-active .overlay {
-  transform: translateX(50%);
-}
-
-.overlay-panel {
-	position: absolute;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	padding: 0 40px;
-	text-align: center;
-	top: 0;
-	height: 100%;
-	width: 50%;
-	transform: translateX(0);
-	transition: transform 0.6s ease-in-out;
-}
-
-.overlay-left {
-	transform: translateX(-20%);
-}
-
-.container.right-panel-active .overlay-left {
-	transform: translateX(0);
-}
-
-.overlay-right {
-	right: 0;
-	transform: translateX(0);
-}
-
-
 
 </style>
