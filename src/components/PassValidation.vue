@@ -60,49 +60,37 @@ export default {
     },
     computed: {
         notSamePasswords () {
-            console.log("nothesame")
-            console.log(this.passwordsFilled)
-            if (this.passwordsFilled) {
-                return (this.password !== this.checkPassword)
+            if (this.password !== "" && this.checkPassword !== "") {
+                return (this.password !== this.checkPassword) ? true : false
             } else {
                 return false
             }
         },
-        passwordsFilled () {
-            return (this.password !== "" && this.checkPassword !== "")
-        },
         passwordValidation () {
-            
-            console.log("pass validation")
-
             let errors = []
             for (let condition of this.rules) { 
-
-                console.log(condition)
-
                 if (!condition.regex.test(this.password)) {
-                    console.log(this.password)
+                    
                     errors.push(condition.message)
                 }
             }
-
+            console.log("----------")
+            console.log(errors)
             return (errors.length === 0) ? { valid: true, errors} : { valid: false, errors }
-            // if (errors.length === 0) {
-            //     return { valid: true, errors }
-            // } else { 
-            //     return { valid: false, errors }
-            // }
         }
     },
     methods: {
-        resetPasswords () {
-            this.password = ""
-            this.checkPassword = ""
-            this.submitted = true
-            setTimeout(() => {
-                this.submitted = false
-            }, 2000)
-        },
+
+        /*TODO: validar uma funcao para limpar os input depois */
+
+        // resetPasswords () {
+        //     this.password = ""
+        //     this.checkPassword = ""
+        //     this.submitted = true
+        //     setTimeout(() => {
+        //         this.submitted = false
+        //     }, 2000)
+        // },
         togglePasswordVisibility () {
             this.passwordVisible = !this.passwordVisible
         }	
@@ -184,6 +172,11 @@ button:focus {
 
 .btn-box {
     margin-top: 20px;
+}
+
+/*TODO: mudar para o vermelho padrao DM*/
+.matches {
+    color: red;
 }
 
 form {
