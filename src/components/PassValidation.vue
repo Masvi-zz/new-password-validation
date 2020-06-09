@@ -74,23 +74,11 @@ export default {
                     errors.push(condition.message)
                 }
             }
-            console.log("----------")
-            console.log(errors)
             return (errors.length === 0) ? { valid: true, errors} : { valid: false, errors }
         }
     },
     methods: {
-
         /*TODO: validar uma funcao para limpar os input depois */
-
-        // resetPasswords () {
-        //     this.password = ""
-        //     this.checkPassword = ""
-        //     this.submitted = true
-        //     setTimeout(() => {
-        //         this.submitted = false
-        //     }, 2000)
-        // },
         togglePasswordVisibility () {
             this.passwordVisible = !this.passwordVisible
         }	
@@ -174,7 +162,6 @@ button:focus {
     margin-top: 20px;
 }
 
-/*TODO: mudar para o vermelho padrao DM*/
 .matches {
     color: red;
 }
