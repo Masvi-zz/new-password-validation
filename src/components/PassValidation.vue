@@ -1,88 +1,87 @@
 <template>
-    <div
-        id="container"
-        class="container"
-    >
-        <div class="form-container sign-in-container">
-            <form action="#">
-                <h2>Cadastro de senha</h2>
-                <input
-                    v-model="password"
-                    :class="{ valid:passwordValidation.valid }"
-                    type="password"
-                    placeholder="Senha"
-                >
-                <input
-                    v-model.lazy='checkPassword'
-                    type="password"
-                    placeholder="Confirme a senha"
-                />
-                <div class="matches" v-if='notSamePasswords'>
-                    <p>Senhas não conferem.</p>
-                </div>
-                <div class="pass-requirement" v-if="!passwordValidation.valid"> 
-                    A senha deve conter:
-                    <span
-                        :key="error" 
-                        v-for='error in passwordValidation.errors'> 
-                        {{ error }}
-                    </span>
-                </div>
-                <div class="btn-box">
-                    <button>Salvar</button>
-                </div>
-            </form>
+  <div
+    id="container"
+    class="container"
+  >
+    <div class="form-container sign-in-container">
+      <form action="#">
+        <h2>Cadastro de senha</h2>
+        <input
+          v-model="password"
+          :class="{ valid:passwordValidation.valid }"
+          type="password"
+          placeholder="Senha"
+        >
+        <input
+          v-model.lazy='checkPassword'
+          type="password"
+          placeholder="Confirme a senha"
+        />
+        <div class="matches" v-if='notSamePasswords'>
+          <p>Senhas não conferem.</p>
         </div>
-        <div class="overlay-container">
-            <div class="overlay" /> 
+        <div class="pass-requirement" v-if="!passwordValidation.valid"> 
+          A senha deve conter:
+          <span
+            :key="error" 
+            v-for='error in passwordValidation.errors'> 
+            {{ error }}
+          </span>
         </div>
+        <div class="btn-box">
+          <button>Salvar</button>
+        </div>
+      </form>
     </div>
+    <div class="overlay-container">
+      <div class="overlay" /> 
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-    name: "PassValidation",
-    props: {
-        msg: String
-    },
-    data () {
-        return {
-            rules: [
-                { message: "Pelo menos 1 letra maiúscula",  regex:/[A-Z]+/ },
-                { message: "Pelo menos 8 caracteres", regex:/.{8,}/ },
-                { message: "Pelo menos 1 número", regex:/[0-9]+/ }
-            ],
-            password: "",
-            checkPassword: "",
-            passwordVisible: false,
-            submitted: false
-        }
-    },
-    computed: {
-        notSamePasswords () {
-            if (this.password !== "" && this.checkPassword !== "") {
-                return (this.password !== this.checkPassword) ? true : false
-            } else {
-                return false
-            }
-        },
-        passwordValidation () {
-            let errors = []
-            for (let condition of this.rules) { 
-                if (!condition.regex.test(this.password)) {
-                    
-                    errors.push(condition.message)
-                }
-            }
-            return (errors.length === 0) ? { valid: true, errors} : { valid: false, errors }
-        }
-    },
-    methods: {
-        /*TODO: validar uma funcao para limpar os input depois */
-        togglePasswordVisibility () {
-            this.passwordVisible = !this.passwordVisible
-        }	
+  name: "PassValidation",
+  props: {
+    msg: String
+  },
+  data () {
+    return {
+      rules: [
+        { message: "Pelo menos 1 letra maiúscula",  regex:/[A-Z]+/ },
+        { message: "Pelo menos 8 caracteres", regex:/.{8,}/ },
+        { message: "Pelo menos 1 número", regex:/[0-9]+/ }
+      ],
+      password: "",
+      checkPassword: "",
+      passwordVisible: false,
+      submitted: false
     }
+  },
+  computed: {
+    notSamePasswords () {
+      if (this.password !== "" && this.checkPassword !== "") {
+        return (this.password !== this.checkPassword)
+      } else {
+        return false
+      }
+    },
+    passwordValidation () {
+      let errors = []
+      for (let condition of this.rules) { 
+        if (!condition.regex.test(this.password)) {  
+          errors.push(condition.message)
+        }
+      }
+      return (errors.length === 0) ? { valid: true, errors} : { valid: false, errors }
+    }
+  },
+  methods: {
+    /*TODO: validar uma funcao para limpar os input depois */
+    togglePasswordVisibility () {
+      this.passwordVisible = !this.passwordVisible
+    }	
+  }
 }
 </script>
 
@@ -123,7 +122,7 @@ p {
 
 span {
 	font-size: 12px;
-    display: block;
+  display: block;
 }
 
 a {
@@ -155,15 +154,15 @@ button:focus {
 }
 
 .pass-requirement {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .btn-box {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .matches {
-    color: red;
+  color: red;
 }
 
 form {
@@ -188,14 +187,14 @@ input {
 .container {
 	background-color: #fff;
 	border-radius: 10px;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
 	0 10px 10px rgba(0,0,0,0.22);
 	position: relative;
 	overflow: hidden;
 	width: 768px;
 	max-width: 100%;
 	min-height: 480px;
-    align: center;
+  align-items: center;
 }
 
 .form-container {

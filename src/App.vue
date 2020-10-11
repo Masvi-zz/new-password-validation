@@ -1,17 +1,17 @@
 <template>
-    <div id="app">
-        <PassValidation msg="Welcome to Your Vue.js App"/>
-    </div>
+  <div id="app">
+    <PassValidation msg="Welcome to Your Vue.js App"/>
+  </div>
 </template>
 
 <script>
-import PassValidation from "./components/PassValidation.vue"
+import PassValidation from "@/components/PassValidation.vue"
 
 export default {
-    name: "App",
-    components: {
-        PassValidation
-    }
+  name: "App",
+  components: {
+    PassValidation
+  }
 }
 </script>   
 
